@@ -10,16 +10,16 @@ from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
 from youtubesearchpython.__future__ import VideosSearch
 
-from ANIYAXMUSIC.utils.database import is_on_off
-from ANIYAXMUSIC.utils.formatters import time_to_seconds
+from SIMMY_X_MUSIC.utils.database import is_on_off
+from SIMMY_X_MUSIC.utils.formatters import time_to_seconds
 
 # ─────────────────────────────
-# 🔥 SHRUTI API CONFIG
+# 🔥 EXTERNAL API CONFIG (Anti-Ban)
 # ─────────────────────────────
 FALLBACK_API_URL = "https://shrutibots.site"
 YOUR_API_URL = None
 
-cookies_file = "ANIYAXMUSIC/assets/cookies.txt"
+cookies_file = "SIMMY_X_MUSIC/assets/cookies.txt"
 
 # 🔄 API URL Loader (Dynamic)
 async def get_api_url():
@@ -48,7 +48,7 @@ async def download_via_shruti(link: str, is_video: bool = False):
     ext = "mp4" if is_video else "mp3"
     file_path = os.path.join(folder, f"{video_id}.{ext}")
 
-    # Cache Check
+    # Cache Check (Agar pehle se downloaded hai toh wahi use karo)
     if os.path.exists(file_path):
         return file_path
 
@@ -241,7 +241,6 @@ class YouTubeAPI:
             print(f"API Failed, trying Fallback: {e}")
 
         # 2️⃣ Fallback (YT-DLP) - Agar API fail ho jaye tabhi chalega
-        # Render par ye fail hi hoga, but safety ke liye rakha hai.
         loop = asyncio.get_running_loop()
 
         def audio_dl():
@@ -279,4 +278,4 @@ class YouTubeAPI:
             downloaded_file = await loop.run_in_executor(None, audio_dl)
             
         return downloaded_file, direct
-                
+            
