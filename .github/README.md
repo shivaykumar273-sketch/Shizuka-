@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Yuki%20Music&fontSize=80&fontColor=fff&animation=twinkling&fontAlignY=38&desc=Advanced%20Telegram%20Music%20Bot&descAlignY=60&descSize=20" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=ANIYAX%20Music&fontSize=80&fontColor=fff&animation=twinkling&fontAlignY=38&desc=Advanced%20Telegram%20Music%20Bot&descAlignY=60&descSize=20" width="100%"/>
 
 </div>
 
