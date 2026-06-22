@@ -30,15 +30,23 @@ from ANIYAXMUSIC.utils.inline import help_pannel, private_panel, start_panel
 from config import BANNED_USERS
 from strings import get_string
 
+import os as _os
+_ASSET_DIR = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "assets")
+
 YUMI_PICS = [
-    "https://files.catbox.moe/eje8y8.jpeg",
-    "https://files.catbox.moe/ey2jzp.jpeg",
-    "https://files.catbox.moe/ah5y0f.jpeg",
-    "https://files.catbox.moe/we4yju.jpeg",
+    _os.path.join(_ASSET_DIR, "thumb1.jpg"),
+    _os.path.join(_ASSET_DIR, "thumb2.jpg"),
+    _os.path.join(_ASSET_DIR, "thumb3.jpg"),
+    _os.path.join(_ASSET_DIR, "thumb4.jpg"),
 ]
 
+START_VIDEO_PATH = _os.path.join(_ASSET_DIR, "start_video.mp4")
+
+# Sticker from less_than_es_by_fStikBot pack (sticker #18, 0-indexed: 17)
+VENATRIX_STICKER_ID = None
+
 # 🔥 PROMO MEIN CUSTOM EMOJIS
-PROMO =  "───────────────────────\n<emoji id='5999100917645841519'>💀</emoji> <b>ᴘᴧɪᴅ ᴘʀσϻσᴛɪση ᴧᴠᴧɪʟᴧʙʟє</b> <emoji id='5999100917645841519'>💀</emoji>\n───────────────────────\n<blockquote><emoji id='6080189526532167993'>😉</emoji> ᴄʜᴧᴛᴛɪηɢ ɢʀσυᴘ's\n<emoji id='5413546177683539369'>😈</emoji> ᴄσʟσʀ ᴛʀᴧᴅɪηɢ ɢᴧϻє's\n<emoji id='6080176744709495278'>🐾</emoji> ᴄʜᴧηηєʟ's | ɢʀσυᴘ's .....\n<emoji id='5415586682286128590'>🔫</emoji> ʙєᴛᴛɪηɢ ᴧᴅs σʀ ᴧηʏᴛʜɪηɢ</blockquote>\n\n───────────────────────\n<emoji id='6080202089311507876'>😎</emoji> <b>ᴘʟᴧηꜱ -</b>\n<blockquote>||<emoji id='5413415116756500503'>☠️</emoji> ᴅᴧɪʟʏ\n<emoji id='5413415116756500503'>☠️</emoji> ᴡєєᴋʟʏ\n<emoji id='5413415116756500503'>☠️</emoji> ϻσηᴛʜʟʏ||</blockquote>\n───────────────────────\n<emoji id='6001132493011425597'>💖</emoji> <b>ᴄσηᴛᴧᴄᴛ -</b> <a href='https://t.me/hehe_stalker'>愛 | 𝗦𝗧么𝗟𝗞𝚵𝗥</a>\n───────────────────────"
+PROMO =  "───────────────────────\n<emoji id='5357592447557848986'>💀</emoji> <b>ᴘᴧɪᴅ ᴘʀσϻσᴛɪση ᴧᴠᴧɪʟᴧʙʟє</b> <emoji id='5357592447557848986'>💀</emoji>\n───────────────────────\n<blockquote><emoji id='5220070652756635426'>😉</emoji> ᴄʜᴧᴛᴛɪηɢ ɢʀσυᴘ's\n<emoji id='5219901967916084166'>😈</emoji> ᴄσʟσʀ ᴛʀᴧᴅɪηɢ ɢᴧϻє's\n<emoji id='5244820603663296299'>🐾</emoji> ᴄʜᴧηηєʟ's | ɢʀσυᴘ's .....\n<emoji id='5219943216781995020'>🔫</emoji> ʙєᴛᴛɪηɢ ᴧᴅs σʀ ᴧηʏᴛʜɪηɢ</blockquote>\n\n───────────────────────\n<emoji id='5294017134756636818'>😎</emoji> <b>ᴘʟᴧηꜱ -</b>\n<blockquote>||<emoji id='5357592447557848986'>☠️</emoji> ᴅᴧɪʟʏ\n<emoji id='5357592447557848986'>☠️</emoji> ᴡєєᴋʟʏ\n<emoji id='5357592447557848986'>☠️</emoji> ϻσηᴛʜʟʏ||</blockquote>\n───────────────────────\n<emoji id='5454365405130810498'>💖</emoji> <b>ᴄσηᴛᴧᴄᴛ -</b> <a href='https://t.me/hehe_stalker'>愛 | 𝗦𝗧么𝗟𝗞𝚵𝗥</a>\n───────────────────────"
 
 GREET = ["💞", "🥂", "🔍", "🧪", "🥂", "⚡️", "🔥"]
 
@@ -53,35 +61,72 @@ async def inject_premium_markup(chat_id, message_id, markup):
     except Exception as e:
         print(f"❌ CODE CRASH: {e}")
 
-# 🔥 THE MAGIC START FUNCTION (WITH FAIL-SAFE)
+# 🔥 FETCH STICKER FROM PACK ON STARTUP (Bot API se direct)
+async def fetch_venatrix_sticker():
+    global VENATRIX_STICKER_ID
+    try:
+        token = getattr(config, "BOT_TOKEN", None)
+        if not token:
+            return
+        url = f"https://api.telegram.org/bot{token}/getStickerSet?name=less_than_es_by_fStikBot"
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as resp:
+                res = await resp.json()
+                if res.get("ok"):
+                    stickers = res["result"]["stickers"]
+                    if len(stickers) >= 18:
+                        VENATRIX_STICKER_ID = stickers[17]["file_id"]
+                    elif stickers:
+                        VENATRIX_STICKER_ID = stickers[-1]["file_id"]
+                    print(f"✅ Sticker fetched: {VENATRIX_STICKER_ID[:20]}...")
+                else:
+                    print(f"⚠️ getStickerSet failed: {res}")
+    except Exception as e:
+        print(f"⚠️ Could not fetch sticker pack: {e}")
+
+# 🔥 THE MAGIC START FUNCTION — VIDEO VERSION
 async def send_magic_start(chat_id, photo_url, caption, markup):
     try:
         token = getattr(config, "BOT_TOKEN", getattr(app, "bot_token", None))
-        url = f"https://api.telegram.org/bot{token}/sendPhoto"
         
+        # Try sending video first (local mp4 file)
+        if _os.path.exists(START_VIDEO_PATH):
+            try:
+                run = await app.send_animation(
+                    chat_id,
+                    animation=START_VIDEO_PATH,
+                    caption=caption,
+                    has_spoiler=True,
+                )
+                await inject_premium_markup(chat_id, run.id, markup)
+                return
+            except Exception as e:
+                print(f"⚠️ Video send failed: {e}")
+        
+        # Fallback: send photo if video fails
+        url_api = f"https://api.telegram.org/bot{token}/sendPhoto"
         payload = {
             "chat_id": chat_id,
-            "photo": photo_url,
+            "photo": photo_url if isinstance(photo_url, str) and photo_url.startswith("http") else "https://files.catbox.moe/ah5y0f.jpeg",
             "caption": caption,
             "parse_mode": "HTML",
-            "has_spoiler": True,  # 👈 Spoiler Here
-            "message_effect_id": "5159385139981059251", # ❤️ Flying Hearts Effect ID
+            "has_spoiler": True,
+            "message_effect_id": "5159385139981059251",
             "reply_markup": {"inline_keyboard": markup}
         }
-        
         async with aiohttp.ClientSession() as session:
-            async with session.post(url, json=payload) as resp:
+            async with session.post(url_api, json=payload) as resp:
                 res = await resp.json()
-                
-                # Agar API ne Magic Effect reject kar diya, toh normal message bhejega
                 if not res.get("ok"):
-                    run = await app.send_photo(chat_id, photo=photo_url, caption=caption, has_spoiler=True) # 👈 Spoiler Here
-                    await inject_premium_markup(chat_id, run.id, markup)
-                    
+                    raise Exception("API rejected")
     except Exception as e:
-        # Crash hone par bhi normal message bhejega
-        run = await app.send_photo(chat_id, photo=photo_url, caption=caption, has_spoiler=True) # 👈 Spoiler Here
-        await inject_premium_markup(chat_id, run.id, markup)
+        # Final fallback
+        try:
+            pic = random.choice(YUMI_PICS)
+            run = await app.send_photo(chat_id, photo=pic, caption=caption, has_spoiler=True)
+            await inject_premium_markup(chat_id, run.id, markup)
+        except:
+            pass
 
 
 @app.on_message(filters.command(["start"]) & filters.private & ~BANNED_USERS)
@@ -93,9 +138,10 @@ async def start_pm(client, message: Message, _):
         await client.send_reaction(chat_id=message.chat.id, message_id=message.id, emoji="❤️")
     except: pass
         
-    # 🔥 STEP 2: STICKER BHEJNA + 5 SEC WAIT + DELETE
+    # 🔥 STEP 2: STICKER BHEJNA (less_than_es_by_fStikBot #18) + DELETE
     try:
-        stk = await message.reply_sticker("CAACAgUAAxkBAAFD0UBpqDbTjoP_CXF7Ce6oZykP4r64jQACxAcAArligFU4dyG-LQJBjDoE")
+        sticker_to_send = VENATRIX_STICKER_ID or "CAACAgUAAxkBAAFD0UBpqDbTjoP_CXF7Ce6oZykP4r64jQACxAcAArligFU4dyG-LQJBjDoE"
+        stk = await message.reply_sticker(sticker_to_send)
         await asyncio.sleep(2) 
         await stk.delete()     
     except: pass
@@ -105,21 +151,21 @@ async def start_pm(client, message: Message, _):
     await add_served_user(message.from_user.id)
     
     await asyncio.sleep(0.1)
-    await loading_1.edit_text("<emoji id='5413546177683539369'>😈</emoji> <b>ᴅɪηɢ ᴅᴏηɢ.</b>")
+    await loading_1.edit_text("<emoji id='5219901967916084166'>😈</emoji> <b>ᴅɪηɢ ᴅᴏηɢ.</b>")
     await asyncio.sleep(0.1)
-    await loading_1.edit_text("<emoji id='5413546177683539369'>😈</emoji> <b>ᴅɪηɢ ᴅᴏηɢ..</b>")
+    await loading_1.edit_text("<emoji id='5219901967916084166'>😈</emoji> <b>ᴅɪηɢ ᴅᴏηɢ..</b>")
     await asyncio.sleep(0.1)
-    await loading_1.edit_text("<emoji id='5413546177683539369'>😈</emoji> <b>ᴅɪηɢ ᴅᴏηɢ...</b>")
+    await loading_1.edit_text("<emoji id='5219901967916084166'>😈</emoji> <b>ᴅɪηɢ ᴅᴏηɢ...</b>")
     await asyncio.sleep(0.1)
-    await loading_1.edit_text("<emoji id='6080202089311507876'>😎</emoji> <b>sᴛᴧʀᴛɪηɢ.</b>")
+    await loading_1.edit_text("<emoji id='5294017134756636818'>😎</emoji> <b>sᴛᴧʀᴛɪηɢ.</b>")
     await asyncio.sleep(0.1)
-    await loading_1.edit_text("<emoji id='6080202089311507876'>😎</emoji> <b>sᴛᴧʀᴛɪηɢ..</b>")
+    await loading_1.edit_text("<emoji id='5294017134756636818'>😎</emoji> <b>sᴛᴧʀᴛɪηɢ..</b>")
     await asyncio.sleep(0.1)
-    await loading_1.edit_text("<emoji id='6080202089311507876'>😎</emoji> <b>sᴛᴧʀᴛɪηɢ...</b>")
+    await loading_1.edit_text("<emoji id='5294017134756636818'>😎</emoji> <b>sᴛᴧʀᴛɪηɢ...</b>")
     await asyncio.sleep(0.1)
-    await loading_1.edit_text("<emoji id='6001132493011425597'>💖</emoji> <b>ʜєʏ ʙᴧʙʏ!</b>")
+    await loading_1.edit_text("<emoji id='5454365405130810498'>💖</emoji> <b>ʜєʏ ʙᴧʙʏ!</b>")
     await asyncio.sleep(0.1)
-    await loading_1.edit_text("<emoji id='5413840936994097463'>🌺</emoji> <b>ᴍɪᴍɪ ꭙ ϻᴜsɪᴄ ♪\nsᴛᴧʀᴛed!</b>")
+    await loading_1.edit_text("<emoji id='5222108309795908493'>🌺</emoji> <b>Venatrix ꭙ ϻᴜsɪᴄ ♪\nsᴛᴧʀᴛed!</b>")
     await asyncio.sleep(0.1)
     await loading_1.delete()
     
@@ -151,7 +197,7 @@ async def start_pm(client, message: Message, _):
             if await is_on_off(2):
                 return await app.send_message(
                     chat_id=config.LOGGER_ID,
-                    text=f"<blockquote><emoji id='6080176744709495278'>🐾</emoji> {message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>sᴜᴅᴏʟɪsᴛ</b>.\n\n<b><emoji id='5413415116756500503'>☠️</emoji> ᴜsᴇʀ ɪᴅ ➠</b> <code>{message.from_user.id}</code>\n<b><emoji id='5999100917645841519'>💀</emoji> ᴜsᴇʀɴᴀᴍᴇ ➠</b> @{message.from_user.username}</blockquote>",
+                    text=f"<blockquote><emoji id='5244820603663296299'>🐾</emoji> {message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>sᴜᴅᴏʟɪsᴛ</b>.\n\n<b><emoji id='5357592447557848986'>☠️</emoji> ᴜsᴇʀ ɪᴅ ➠</b> <code>{message.from_user.id}</code>\n<b><emoji id='5357592447557848986'>💀</emoji> ᴜsᴇʀɴᴀᴍᴇ ➠</b> @{message.from_user.username}</blockquote>",
                 )
             return
             
@@ -176,8 +222,8 @@ async def start_pm(client, message: Message, _):
             
             key = [
                 [
-                    {"text": _["S_B_8"], "url": link, "style": "primary", "icon_custom_emoji_id": "6080202089311507876"},
-                    {"text": _["S_B_9"], "url": config.SUPPORT_CHAT, "style": "danger", "icon_custom_emoji_id": "5999100917645841519"},
+                    {"text": _["S_B_8"], "url": link, "style": "primary", "icon_custom_emoji_id": "5294017134756636818"},
+                    {"text": _["S_B_9"], "url": config.SUPPORT_CHAT, "style": "danger", "icon_custom_emoji_id": "5357592447557848986"},
                 ]
             ]
             await m.delete()
@@ -196,7 +242,7 @@ async def start_pm(client, message: Message, _):
             if await is_on_off(2):
                 return await app.send_message(
                     chat_id=config.LOGGER_ID,
-                    text=f"<emoji id='6080176744709495278'>🐾</emoji> {message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>ᴛʀᴀᴄᴋ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</b>.\n\n<emoji id='5413415116756500503'>☠️</emoji> <b>ᴜsᴇʀ ɪᴅ ➠</b> <code>{message.from_user.id}</code>\n<emoji id='5999100917645841519'>💀</emoji> <b>ᴜsᴇʀɴᴀᴍᴇ ➠</b> @{message.from_user.username}",
+                    text=f"<emoji id='5244820603663296299'>🐾</emoji> {message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>ᴛʀᴀᴄᴋ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</b>.\n\n<emoji id='5357592447557848986'>☠️</emoji> <b>ᴜsᴇʀ ɪᴅ ➠</b> <code>{message.from_user.id}</code>\n<emoji id='5357592447557848986'>💀</emoji> <b>ᴜsᴇʀɴᴀᴍᴇ ➠</b> @{message.from_user.username}",
                 )
     else:
         out = private_panel(_)
@@ -217,7 +263,7 @@ async def start_pm(client, message: Message, _):
         if await is_on_off(2):
             return await app.send_message(
                 chat_id=config.LOGGER_ID,
-                text=f"<emoji id='6080176744709495278'>🐾</emoji> {message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<emoji id='5413415116756500503'>☠️</emoji> <b>ᴜsᴇʀ ɪᴅ ➠</b> <code>{message.from_user.id}</code>\n<emoji id='5999100917645841519'>💀</emoji> <b>ᴜsᴇʀɴᴀᴍᴇ ➠</b> @{message.from_user.username}",
+                text=f"<emoji id='5244820603663296299'>🐾</emoji> {message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<emoji id='5357592447557848986'>☠️</emoji> <b>ᴜsᴇʀ ɪᴅ ➠</b> <code>{message.from_user.id}</code>\n<emoji id='5357592447557848986'>💀</emoji> <b>ᴜsᴇʀɴᴀᴍᴇ ➠</b> @{message.from_user.username}",
             )
 
 @app.on_message(filters.command(["start"]) & filters.group & ~BANNED_USERS)
@@ -283,7 +329,7 @@ async def welcome(client, message: Message):
                     return await app.leave_chat(message.chat.id)
 
                 out = start_panel(_)
-                bot_welcome = f"<emoji id='6080202089311507876'>😎</emoji> <b>𝖶𝖾𝗅𝖼𝗈𝗆𝖾 𝖳𝗈 {message.chat.title}</b>\n<emoji id='6001132493011425597'>💖</emoji> 𝖳𝗁𝖺𝗇𝗄𝗌 𝖿𝗈𝗋 𝖺𝖽𝖽𝗂𝗇𝗀 𝗆𝖾, 𝖨 𝖺𝗆 𝗋𝖾𝖺𝖽𝗒 𝗍𝗈 𝗉𝗅𝖺𝗒!"
+                bot_welcome = f"<emoji id='5294017134756636818'>😎</emoji> <b>𝖶𝖾𝗅𝖼𝗈𝗆𝖾 𝖳𝗈 {message.chat.title}</b>\n<emoji id='5454365405130810498'>💖</emoji> 𝖳𝗁𝖺𝗇𝗄𝗌 𝖿𝗈𝗋 𝖺𝖽𝖽𝗂𝗇𝗀 𝗆𝖾, 𝖨 𝖺𝗆 𝗋𝖾𝖺𝖽𝗒 𝗍𝗈 𝗉𝗅𝖺𝗒!"
                 
                 run = await message.reply_text(text=bot_welcome, disable_web_page_preview=True)
                 await inject_premium_markup(message.chat.id, run.id, out)
@@ -298,7 +344,7 @@ async def welcome(client, message: Message):
                 
                 await message.stop_propagation()
             else:
-                user_welcome = f"<emoji id='5413840936994097463'>🌺</emoji> <b>𝖶𝖾𝗅𝖼𝗈𝗆𝖾 𝖳𝗈 {message.chat.title}, {member.mention}!</b>"
+                user_welcome = f"<emoji id='5222108309795908493'>🌺</emoji> <b>𝖶𝖾𝗅𝖼𝗈𝗆𝖾 𝖳𝗈 {message.chat.title}, {member.mention}!</b>"
                 run = await message.reply_text(text=user_welcome, disable_web_page_preview=True)
                 
                 async def delete_user_msg():
@@ -309,4 +355,5 @@ async def welcome(client, message: Message):
 
         except Exception as ex:
             pass
-            
+
+    
