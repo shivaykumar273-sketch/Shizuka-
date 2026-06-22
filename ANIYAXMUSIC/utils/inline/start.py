@@ -29,14 +29,14 @@ def start_panel(_):
                 text=_["S_B_1"], 
                 url=f"https://t.me/{app.username}?startgroup=true", 
                 style="success", 
-                custom_emoji_id="6001132493011425597"
+                custom_emoji_id="5454365405130810498"
             ),
             # Support Chat (Red)
             api_btn(
                 text=_["S_B_2"], 
                 url=config.SUPPORT_CHAT, 
                 style="danger", 
-                custom_emoji_id="5999100917645841519"
+                custom_emoji_id="5357592447557848986"
             ),
         ],
     ]
@@ -53,7 +53,7 @@ def private_panel(_):
                 text=_["S_B_3"],
                 url=f"https://t.me/{app.username}?startgroup=true",
                 style="success",
-                custom_emoji_id="6080202089311507876"
+                custom_emoji_id="5294017134756636818"
             )
         ],
         [
@@ -62,14 +62,14 @@ def private_panel(_):
                 text=_["S_B_4"], 
                 callback_data="settings_back_helper", 
                 style="primary", 
-                custom_emoji_id="6080176744709495278"
+                custom_emoji_id="5244820603663296299"
             ),
-            # Mimi Tunes (Blue)
+            # Balling button
             api_btn(
-                text="˹ᴍɪᴍɪ ᴛᴜɴᴇs˼♪", 
-                url="http://t.me/IAM_MIMBOT", 
+                text="𝚩𝛂𝛏𝛏𝛊𝛏𝛄", 
+                url="https://t.me/URLORD_FUCCKxSOON", 
                 style="primary", 
-                custom_emoji_id="5413840936994097463"
+                custom_emoji_id="5222108309795908493"
             ),
         ],
         [
@@ -78,14 +78,14 @@ def private_panel(_):
                 text=_["S_B_6"], 
                 url=config.SUPPORT_CHANNEL, 
                 style="primary", 
-                custom_emoji_id="5415586682286128590"
+                custom_emoji_id="5219943216781995020"
             ),
             # Support Chat (Red)
             api_btn(
                 text=_["S_B_2"], 
                 url=config.SUPPORT_CHAT, 
                 style="danger", 
-                custom_emoji_id="5413415116756500503"
+                custom_emoji_id="5357592447557848986"
             ),
         ],
         [
@@ -94,9 +94,9 @@ def private_panel(_):
                 text=_["S_B_5"], 
                 url=f"tg://user?id={safe_owner_id}", 
                 style="danger", 
-                custom_emoji_id="5413546177683539369"
+                custom_emoji_id="5219901967916084166"
             ),
         ],
     ]
     return buttons
-    
+
