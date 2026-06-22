@@ -23,8 +23,21 @@ FONTS = load_fonts()
 
 FALLBACK_IMAGE_PATH = "ANIYAXMUSIC/assets/controller.png"
 
+# Local thumbnail images (4 images cycle karta hai)
+import itertools as _itertools
+_LOCAL_THUMBS = [
+    "ANIYAXMUSIC/assets/thumb1.jpg",
+    "ANIYAXMUSIC/assets/thumb2.jpg",
+    "ANIYAXMUSIC/assets/thumb3.jpg",
+    "ANIYAXMUSIC/assets/thumb4.jpg",
+]
+_thumb_cycle = _itertools.cycle(_LOCAL_THUMBS)
+
+def get_next_thumb_path() -> str:
+    return next(_thumb_cycle)
+
 # Teri fix ki hui default safe photo 🛡️
-YOUTUBE_IMG_URL = "https://files.catbox.moe/jjbbe8.jpg"
+YOUTUBE_IMG_URL = "https://i.ibb.co/nswdf199/9e78edd7-f3b5-4496-87ae-8b5ee0a76d3d.jpg"
 
 async def resize_youtube_thumbnail(img: Image.Image) -> Image.Image:
     target_width, target_height = 1280, 720
@@ -50,6 +63,17 @@ async def resize_youtube_thumbnail(img: Image.Image) -> Image.Image:
     return enhanced
 
 async def fetch_image(url: str) -> Image.Image:
+    # Local file support karta hai (local paths directly read karta hai)
+    import os as _os2
+    if url and not url.startswith("http") and _os2.path.exists(url):
+        try:
+            async with aiofiles.open(url, mode="rb") as f:
+                img = Image.open(BytesIO(await f.read())).convert("RGBA")
+            img = await resize_youtube_thumbnail(img)
+            return img
+        except Exception as e:
+            LOGGER.error("Local image load error for %s: %s", url, e)
+
     async with httpx.AsyncClient() as client:
         try:
             if not url:
@@ -60,18 +84,19 @@ async def fetch_image(url: str) -> Image.Image:
             if url.startswith("https://i.ytimg.com"):
                 img = await resize_youtube_thumbnail(img)
             else:
-                img = await resize_youtube_thumbnail(img) # Hamesha resize karega taaki design na bigde
+                img = await resize_youtube_thumbnail(img)
             return img
         except Exception as e:
             LOGGER.error("Image loading error for URL %s: %s", url, e)
+            # Fallback: local cycling thumb
             try:
-                response = await client.get(YOUTUBE_IMG_URL, timeout=5)
-                response.raise_for_status()
-                img = Image.open(BytesIO(response.content)).convert("RGBA")
+                local_thumb = get_next_thumb_path()
+                async with aiofiles.open(local_thumb, mode="rb") as f:
+                    img = Image.open(BytesIO(await f.read())).convert("RGBA")
                 img = await resize_youtube_thumbnail(img)
                 return img
-            except Exception as e:
-                LOGGER.error("YouTube fallback image error: %s", e)
+            except Exception as e2:
+                LOGGER.error("Local thumb fallback error: %s", e2)
                 try:
                     async with aiofiles.open(FALLBACK_IMAGE_PATH, mode="rb") as f:
                         img = Image.open(BytesIO(await f.read())).convert("RGBA")
@@ -160,13 +185,13 @@ async def get_thumb(videoid: str) -> str:
         title = clean_text(result.get("title", "Unknown Title"), limit=25)
         artist = clean_text(result.get("channel", {}).get("name", "Unknown Artist"), limit=28)
         
-        # 🚨 HACKER SHIELD: YouTube ki original photo ko bypass karke hamesha apni safe image laga dega!
-        thumbnail_url = YOUTUBE_IMG_URL 
+        # Local cycling thumb use karta hai (4 images rotate karta hai)
+        thumbnail_url = get_next_thumb_path()
         
     except Exception as e:
         LOGGER.error("YouTube metadata fetch error for video %s: %s", videoid, e)
         title, artist = "Unknown Title", "Unknown Artist"
-        thumbnail_url = YOUTUBE_IMG_URL
+        thumbnail_url = get_next_thumb_path()
 
     thumb = await fetch_image(thumbnail_url)
     bg = await add_controls(thumb)
@@ -197,4 +222,5 @@ async def get_thumb(videoid: str) -> str:
     image.close()
     bg.close()
     return ""
+
     
