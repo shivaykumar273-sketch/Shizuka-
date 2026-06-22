@@ -25,7 +25,7 @@ FONT_PATH = "ANIYAXMUSIC/assets/arial.ttf"
 
 # --- RANDOM WARNING MESSAGES ---
 WARNING_MESSAGES = [
-    "<emoji id='6334789677396002338'>⏱</emoji> Time passes. Tick tock, tick tock...",
+    "<emoji id='5258113901106580375'>⏱</emoji> Time passes. Tick tock, tick tock...",
     "⚠️ Alarm: time is running out!!",
     "🥱 It's too quiet here... let's play a game!",
     "👀 Anyone there? Get ready to type..."
@@ -121,7 +121,7 @@ async def start_word_game(chat_id):
     try:
         word = await get_random_word()
         img_path = create_game_image(word)
-        caption = "<emoji id='6334696528145286813'>⚡</emoji> **Be the first to write the word shown in the photo to climb the mini-game leaderboard.**\n\n<emoji id='6334789677396002338'>⏱</emoji> **Time remaining:** 10 minutes"
+        caption = "<emoji id='5258113901106580375'>⚡</emoji> **Be the first to write the word shown in the photo to climb the mini-game leaderboard.**\n\n<emoji id='5258113901106580375'>⏱</emoji> **Time remaining:** 10 minutes"
         sent_msg = await app.send_photo(chat_id, photo=img_path, caption=caption, has_spoiler=True)
         if os.path.exists(img_path): os.remove(img_path) 
         active_games[chat_id] = {"type": "word", "answer": word, "start_time": time.time(), "message_id": sent_msg.id}
@@ -140,7 +140,7 @@ async def start_emoji_game(chat_id):
         random.shuffle(options)
 
         img_path = await create_emoji_image(correct_emoji)
-        caption = "👇 **Identify the emoji written in the photo and select it here to move up the minigame rankings!**\n\n<emoji id='6334789677396002338'>⏱</emoji> **Time remaining:** 10 minutes"
+        caption = "👇 **Identify the emoji written in the photo and select it here to move up the minigame rankings!**\n\n<emoji id='5258113901106580375'>⏱</emoji> **Time remaining:** 10 minutes"
         
         sent_msg = await app.send_photo(chat_id, photo=img_path, caption=caption, has_spoiler=True)
         if os.path.exists(img_path): os.remove(img_path)
@@ -235,15 +235,15 @@ async def chat_activity_tracker(client, message: Message):
             else:
                 await game_db.insert_one({"user_id": user_id, "name": message.from_user.first_name, "points": 15})
             
-            msg = (f"<emoji id='6334696528145286813'>⚡</emoji> **How fast!** ({time_taken} seconds)\n"
-                   f"<emoji id='6334471179801200139'>🎉</emoji> {message.from_user.mention} guessed the word in record time!\n"
+            msg = (f"<emoji id='5258113901106580375'>⚡</emoji> **How fast!** ({time_taken} seconds)\n"
+                   f"<emoji id='5222108309795908493'>🎉</emoji> {message.from_user.mention} guessed the word in record time!\n"
                    f"Correct Word: **{correct_word}**\n*+15 in the global game ranking*")
             await message.reply_text(msg)
 
 @app.on_message(filters.command(["wordleaderboard", "gametop"]) & filters.group)
 async def word_leaderboard(client, message: Message):
     top_users = game_db.find().sort("points", -1).limit(10)
-    text = "<emoji id='6334381440754517833'>🏆</emoji> **Word Game Global Leaderboard** <emoji id='6334381440754517833'>🏆</emoji>\n\n"
+    text = "<emoji id='5310224206732996002'>🏆</emoji> **Word Game Global Leaderboard** <emoji id='5310224206732996002'>🏆</emoji>\n\n"
     count, has_users = 1, False
     async for user in top_users:
         has_users = True
@@ -281,4 +281,4 @@ async def inactivity_checker_loop():
                 except Exception: pass
 
 asyncio.create_task(inactivity_checker_loop())
-    
+
