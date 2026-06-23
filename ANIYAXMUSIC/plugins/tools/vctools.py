@@ -13,9 +13,9 @@ from ANIYAXMUSIC import app, Userbot
 from typing import List, Union
 from ANIYAXMUSIC.core.call import ANIYA
 from pyrogram.types import VideoChatEnded
-from pytgcalls import PyTgCalls, StreamType
-from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
-from pytgcalls.exceptions import (NoActiveGroupCall, TelegramServerError, AlreadyJoinedError)
+from pytgcalls import PyTgCalls
+from pytgcalls.types import MediaStream, AudioQuality, VideoQuality
+from pytgcalls.exceptions import NoActiveGroupCall, NotInCallError
 
 # ==================================================
 # 🔥 VC SOUND STATE & VOLUME BAR TRACKER 🔥
@@ -327,4 +327,5 @@ async def vc_sound_callback(client: Client, cq: CallbackQuery):
         await cq.answer("ʙʜᴀɪ ᴘᴇʜʟᴇ ᴠᴄ ᴍᴇ ɢᴀᴀɴᴀ ᴛᴏʜ ᴘʟᴀʏ ᴋᴀʀ ʟᴇ! 🤦‍♂️", show_alert=True)
     except Exception as e:
         await cq.answer(f"ᴛʜᴏᴅᴀ ᴡᴀɪᴛ ᴋᴀʀ ʏᴀ ᴇʀʀᴏʀ ᴅᴇᴋʜ: {str(e)[:50]}", show_alert=True)
-             
+
+            
