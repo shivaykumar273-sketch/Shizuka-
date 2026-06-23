@@ -45,3 +45,4 @@ async def ANIYABin(text):
         return
     link = BASE + resp["message"]
     return link
+    
