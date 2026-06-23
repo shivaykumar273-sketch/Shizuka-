@@ -1,19 +1,30 @@
-import glob
-from os.path import dirname, isfile
+from ANIYAXMUSIC.core.bot import ANIYA
+from ANIYAXMUSIC.core.dir import dirr
+from ANIYAXMUSIC.core.git import git
+from ANIYAXMUSIC.core.userbot import Userbot
+from ANIYAXMUSIC.misc import dbb, heroku
+
+from SafoneAPI import SafoneAPI
+from .logging import LOGGER
+
+dirr()
+# git() disabled - no GitHub credentials in Replit environment
+dbb()
+heroku()
+
+app = ANIYA()
+userbot = Userbot()
+api = SafoneAPI()
 
 
-def __list_all_modules():
-    work_dir = dirname(__file__)
-    mod_paths = glob.glob(work_dir + "/*/*.py")
+from .platforms import *
 
-    all_modules = [
-        (((f.replace(work_dir, "")).replace("/", "."))[:-3])
-        for f in mod_paths
-        if isfile(f) and f.endswith(".py") and not f.endswith("__init__.py")
-    ]
+Apple = AppleAPI()
+Carbon = CarbonAPI()
+SoundCloud = SoundAPI()
+Spotify = SpotifyAPI()
+Resso = RessoAPI()
+Telegram = TeleAPI()
+YouTube = YouTubeAPI()
 
-    return all_modules
-
-
-ALL_MODULES = sorted(__list_all_modules())
-__all__ = ALL_MODULES + ["ALL_MODULES"]
+APP = "ll_DRAGON_MUSIC_BOT"  # connect music api key "Dont change it"
