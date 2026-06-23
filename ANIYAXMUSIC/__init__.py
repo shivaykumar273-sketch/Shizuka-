@@ -8,7 +8,7 @@ from SafoneAPI import SafoneAPI
 from .logging import LOGGER
 
 dirr()
-git()
+# git() disabled - no GitHub credentials in Replit environment
 dbb()
 heroku()
 
