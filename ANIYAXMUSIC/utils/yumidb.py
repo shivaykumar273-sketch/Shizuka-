@@ -1,4 +1,3 @@
-
 from functools import wraps 
 
 from pyrogram import Client
@@ -203,4 +202,5 @@ def user_can_promote(mystic):
                                                     
         return await mystic(app,message,*args,**kwargs)
     return wrapper
-        
+
+    
