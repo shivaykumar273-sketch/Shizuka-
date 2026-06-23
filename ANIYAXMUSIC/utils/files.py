@@ -69,3 +69,4 @@ async def get_document_from_file_id(
         access_hash=decoded.access_hash,
         file_reference=decoded.file_reference,
     )
+    
