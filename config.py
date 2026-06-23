@@ -20,7 +20,7 @@ OWNER_USERNAME = getenv("OWNER_USERNAME","Kaito_3_2")
 # --------------------------------------------------------
 BOT_USERNAME = getenv("BOT_USERNAME" , "IAM_MIMBOT")
 # --------------------------------------------------------
-BOT_NAME = getenv("BOT_NAME" , "MIMI X MUSIC")
+BOT_NAME = getenv("BOT_NAME" , "Venatrix")
 # ---------------------------------------------------------
 ASSUSERNAME = getenv("ASSUSERNAME" , "Kaito_3_2")
 # ---------------------------------------------------------
@@ -69,8 +69,8 @@ GIT_TOKEN = getenv(
 
 # ------------------------------------------------------------------------
 # -------------------------------------------------------------------------
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/+N08m5L1mCTU2NTE1")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/heartstealer_x")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/Ig_Aanyaa")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/+Sbm_iY4scdo5ZjA1")
 # ------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------
 
@@ -116,7 +116,7 @@ TG_VIDEO_FILESIZE_LIMIT = int(getenv("TG_VIDEO_FILESIZE_LIMIT", "5242880000"))
 # ------------------------------------
 # ------------------------------------
 # ------------------------------------
-STRING1 = getenv("STRING_SESSION", "BQGV228AnXNo28JZUA8Gj_U2NXX7Gf-D7v0wBMBtAVmfm4tchpWtUbg5XaAJqLKMPSVOEseufFuzFrbH3IIit5_IJL997Z_1UUgnAu50mSjHcuDhBLEc1r3Q8T8J506_io6JyLF1ElpuU0jer8QswWQAn2Lp4IGHM0VCaDsSserjVoh1HKwfWQnr3oWnr919gnmRwyDU8TlazWYrcT7MhtMBOLVIn7YOSZsLfMdFu-v0lrujxGWkp48zdTAonetevCBVWbkSetWnRKROhZWUh6ItGtFk5d75uWmtO1LAP_kKlz9wxc-9nsBYrUiDmv4OtSheB8ma_Ag2PKFa9uYZagsdiOhyjAAAAAGwUnlsAA")
+STRING1 = getenv("STRING1", getenv("STRING_SESSION", ""))
 STRING2 = getenv("STRING_SESSION2", None)
 STRING3 = getenv("STRING_SESSION3", None)
 STRING4 = getenv("STRING_SESSION4", None)
@@ -143,21 +143,21 @@ confirmer = {}
 # ------------------------------------------------------------------------
 # ------------------------------------------------------------------------
 START_IMG_URL = getenv(
-    "START_IMG_URL", "https://files.catbox.moe/toqchm.mp4"
+    "START_IMG_URL", "https://files.catbox.moe/ah5y0f.jpeg"
 )
 PING_IMG_URL = getenv(
-    "PING_IMG_URL", "https://files.catbox.moe/jjbbe8.jpg"
+    "PING_IMG_URL", "https://files.catbox.moe/bj5s8s.jpeg"
 )
-PLAYLIST_IMG_URL = "https://files.catbox.moe/jjbbe8.jpg"
-STATS_IMG_URL = "https://files.catbox.moe/toqchm.mp4"
-TELEGRAM_AUDIO_URL = "https://files.catbox.moe/e4qe8q.jpg"
-TELEGRAM_VIDEO_URL = "https://files.catbox.moe/toqchm.mp4"
-STREAM_IMG_URL = "https://files.catbox.moe/toqchm.mp4"
-SOUNCLOUD_IMG_URL = "https://files.catbox.moe/toqchm.mp4"
-YOUTUBE_IMG_URL = "https://files.catbox.moe/toqchm.mp4"
-SPOTIFY_ARTIST_IMG_URL = "https://files.catbox.moe/toqchm.mp4"
-SPOTIFY_ALBUM_IMG_URL = "https://files.catbox.moe/toqchm.mp4"
-SPOTIFY_PLAYLIST_IMG_URL = "https://files.catbox.moe/toqchm.mp4"
+PLAYLIST_IMG_URL = "https://graph.org/file/5346f8d3e34f85855176b-8f3a38df6c805fb7d7.jpg"
+STATS_IMG_URL = "https://files.catbox.moe/8rmrd9.jpg"
+TELEGRAM_AUDIO_URL = "https://files.catbox.moe/2vq8oz.jpg"
+TELEGRAM_VIDEO_URL = "https://files.catbox.moe/2vq8oz.jpg"
+STREAM_IMG_URL = "https://files.catbox.moe/2vq8oz.jpg"
+SOUNCLOUD_IMG_URL = "https://files.catbox.moe/2vq8oz.jpg"
+YOUTUBE_IMG_URL = "https://files.catbox.moe/2vq8oz.jpg"
+SPOTIFY_ARTIST_IMG_URL = "https://files.catbox.moe/2vq8oz.jpg"
+SPOTIFY_ALBUM_IMG_URL = "https://files.catbox.moe/2vq8oz.jpg"
+SPOTIFY_PLAYLIST_IMG_URL = "https://files.catbox.moe/2vq8oz.jpg"
 
 # ------------------------------------------------------------------------
 # ------------------------------------------------------------------------
