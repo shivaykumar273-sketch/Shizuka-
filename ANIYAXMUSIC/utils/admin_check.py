@@ -27,3 +27,4 @@ async def admin_check(message: Message) -> bool:
         return False
     else:
         return True
+        
