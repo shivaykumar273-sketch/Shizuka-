@@ -55,3 +55,4 @@ async def create_sticker(
     sticker: raw.base.InputDocument, emoji: str
 ) -> raw.base.InputStickerSetItem:
     return raw.types.InputStickerSetItem(document=sticker, emoji=emoji)
+    
