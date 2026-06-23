@@ -16,13 +16,13 @@ API_HASH = getenv("API_HASH")
 # ------------------------------------------------------
 BOT_TOKEN = getenv("BOT_TOKEN")
 # -------------------------------------------------------
-OWNER_USERNAME = getenv("OWNER_USERNAME","Kaito_3_2")
+OWNER_USERNAME = getenv("OWNER_USERNAME","zctol")
 # --------------------------------------------------------
-BOT_USERNAME = getenv("BOT_USERNAME" , "IAM_MIMBOT")
+BOT_USERNAME = getenv("BOT_USERNAME" , "UrShivaxMusic_bot")
 # --------------------------------------------------------
-BOT_NAME = getenv("BOT_NAME" , "Venatrix")
+BOT_NAME = getenv("BOT_NAME" , "˹𝐒ʜɪᴠᴀ ꭙ 𝐌ᴜꜱɪᴄ ♪˼")
 # ---------------------------------------------------------
-ASSUSERNAME = getenv("ASSUSERNAME" , "Kaito_3_2")
+ASSUSERNAME = getenv("ASSUSERNAME" , "zctol")
 # ---------------------------------------------------------
 GROQ_API_KEY="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"
 
@@ -37,10 +37,10 @@ DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 17000))
 # ----------------------------------------------------------------
 
 # ----------------------------------------------------------------
-LOGGER_ID = int(getenv("LOGGER_ID", -1003639584506))
+LOGGER_ID = int(getenv("LOGGER_ID", -1004335372794)
 # ----------------------------------------------------------------
 # ----------------------------------------------------------------
-OWNER_ID = int(getenv("OWNER_ID", 6356015122))
+OWNER_ID = int(getenv("OWNER_ID", 6278373904))
 # -----------------------------------------------------------------
 # -----------------------------------------------------------------
 
@@ -69,8 +69,8 @@ GIT_TOKEN = getenv(
 
 # ------------------------------------------------------------------------
 # -------------------------------------------------------------------------
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/Ig_Aanyaa")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/+Sbm_iY4scdo5ZjA1")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/Zqflly")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/+am_rBjHfQ2QyNTU1")
 # ------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------
 
@@ -93,8 +93,8 @@ SONG_DOWNLOAD_DURATION_LIMIT = int(getenv("SONG_DOWNLOAD_DURATION_LIMIT", "99999
 # --------------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------------
-SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", "1c21247d714244ddbb09925dac565aed")
-SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", "709e1a2969664491b58200860623ef19")
+SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", "ShrutiBotshtKshQPNJONaPswXAhgg")
+SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", "31xq054jlavzddidwcwoigplscxa")
 # ----------------------------------------------------------------------------------
 
 
