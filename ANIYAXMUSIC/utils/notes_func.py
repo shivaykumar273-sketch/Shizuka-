@@ -355,3 +355,4 @@ def preview_text_replace(text):
         return (
             preview, text
         )
+    
