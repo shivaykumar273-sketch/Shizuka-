@@ -15,3 +15,4 @@ async def extract_user(m: Message) -> User:
         if m.command[1].isdecimal()
         else m.command[1]
     )
+    
