@@ -30,7 +30,7 @@ def track_markup(_, videoid, user_id, channel, fplay):
         ],
         [
             # Cleaned text
-            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data=f"forceclose {videoid}|{user_id}", style="danger", custom_emoji_id="5219805369806629055")
+            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data=f"forceclose {videoid}|{user_id}", style="danger", custom_emoji_id="6334598469746952256")
         ],
     ]
     return buttons
@@ -62,27 +62,27 @@ def stream_markup_timer(_, chat_id, played, dur):
     buttons = [
         [
             # Full Premium Timer Bar! (Kyunki ab call.py isko support karta hai)
-            api_btn(text=f"{played}  {bar}  {dur}", callback_data="GetTimer", style="primary", custom_emoji_id="5258113901106580375")
+            api_btn(text=f"{played}  {bar}  {dur}", callback_data="GetTimer", style="primary", custom_emoji_id="6334696528145286813")
         ],
         [
             # 4 Premium Emoji Buttons (Play, Pause, Skip, Stop)
-            api_btn(text=" ", callback_data=f"ADMIN Resume|{chat_id}", style="primary", custom_emoji_id="5219899949281453881"), 
-            api_btn(text=" ", callback_data=f"ADMIN Pause|{chat_id}", style="danger", custom_emoji_id="5334811859415477124"), 
-            api_btn(text=" ", callback_data=f"ADMIN Skip|{chat_id}", style="success", custom_emoji_id="5222148368955877900"), 
-            api_btn(text=" ", callback_data=f"ADMIN Stop|{chat_id}", style="danger", custom_emoji_id="5219805369806629055"), 
+            api_btn(text=" ", callback_data=f"ADMIN Resume|{chat_id}", style="primary", custom_emoji_id="5343597635926245720"), 
+            api_btn(text=" ", callback_data=f"ADMIN Pause|{chat_id}", style="danger", custom_emoji_id="5408916593780470262"), 
+            api_btn(text=" ", callback_data=f"ADMIN Skip|{chat_id}", style="success", custom_emoji_id="5409262351532701571"), 
+            api_btn(text=" ", callback_data=f"ADMIN Stop|{chat_id}", style="danger", custom_emoji_id="5409042015415448331"), 
         ],
         [
             # Tunes & Home
-            api_btn(text="𝚻𝛖𝛏𝛆𝛔 🎶", url="https://t.me/UrVenatrix_music_bot", style="primary", custom_emoji_id="5222472119295684375"),
-            api_btn(text="𝚮𝛐𝛍𝛆", url="https://t.me/ABOUTxYUTAA", style="primary", custom_emoji_id="5294017134756636818"),
+            api_btn(text="𝚻𝛖𝛏𝛆𝛔 🎶", url="https://t.me/ShizukaxMusic_rxbot", style="primary", custom_emoji_id="6334333036473091884"),
+            api_btn(text="𝚮𝛐𝛍𝛆", url="https://t.me/Zqflly", style="primary", custom_emoji_id="6334648089504122382"),
         ],
         [
             # Privacy Policy
-            api_btn(text="ᴘʀɪᴠᴀᴄʏ  ", url="https://telegra.ph/Privacy-Policy-03-15-2", style="success", custom_emoji_id="5393302369024882368")
+            api_btn(text="ᴘʀɪᴠᴀᴄʏ  ", url="https://telegra.ph/Privacy-Policy-03-15-2", style="success", custom_emoji_id="6334672948774831861")
         ],
         [
             # Close Red
-            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data="close", style="danger", custom_emoji_id="5219805369806629055")
+            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data="close", style="danger", custom_emoji_id="6334598469746952256")
         ],
     ]
     return buttons
@@ -90,20 +90,20 @@ def stream_markup_timer(_, chat_id, played, dur):
 def stream_markup(_, chat_id):
     buttons = [
         [
-            api_btn(text=" ", callback_data=f"ADMIN Resume|{chat_id}", style="primary", custom_emoji_id="5219899949281453881"), 
-            api_btn(text=" ", callback_data=f"ADMIN Pause|{chat_id}", style="danger", custom_emoji_id="5334811859415477124"), 
-            api_btn(text=" ", callback_data=f"ADMIN Skip|{chat_id}", style="success", custom_emoji_id="5222148368955877900"), 
-            api_btn(text=" ", callback_data=f"ADMIN Stop|{chat_id}", style="danger", custom_emoji_id="5219805369806629055"), 
+            api_btn(text=" ", callback_data=f"ADMIN Resume|{chat_id}", style="primary", custom_emoji_id="5343597635926245720"), 
+            api_btn(text=" ", callback_data=f"ADMIN Pause|{chat_id}", style="danger", custom_emoji_id="5408916593780470262"), 
+            api_btn(text=" ", callback_data=f"ADMIN Skip|{chat_id}", style="success", custom_emoji_id="5409262351532701571"), 
+            api_btn(text=" ", callback_data=f"ADMIN Stop|{chat_id}", style="danger", custom_emoji_id="5409042015415448331"), 
         ],
         [
-            api_btn(text="𝚻𝛖𝛏𝛆𝛔 🎶", url="https://t.me/UrVenatrix_music_bot", style="primary", custom_emoji_id="5222472119295684375"),
-            api_btn(text="𝚮𝛐𝛍𝛆", url="https://t.me/ABOUTxYUTAA", style="primary", custom_emoji_id="5294017134756636818"),
+            api_btn(text="𝚻𝛖𝛏𝛆𝛔 🎶", url="https://t.me/ShizukaxMusic_rxbot", style="primary", custom_emoji_id="6334333036473091884"),
+            api_btn(text="𝚮𝛐𝛍𝛆", url="https://t.me/Zqflly", style="primary", custom_emoji_id="6334648089504122382"),
         ],
         [
-            api_btn(text="ᴘʀɪᴠᴀᴄʏ. ", url="https://telegra.ph/Privacy-Policy-03-15-2", style="success", custom_emoji_id="5393302369024882368")
+            api_btn(text="ᴘʀɪᴠᴀᴄʏ. ", url="https://telegra.ph/Privacy-Policy-03-15-2", style="success", custom_emoji_id="6334672948774831861")
         ],
         [
-            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data="close", style="danger", custom_emoji_id="5219805369806629055")
+            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data="close", style="danger", custom_emoji_id="6334598469746952256")
         ],
     ]
     return buttons
@@ -115,7 +115,7 @@ def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
             api_btn(text=_["P_B_2"], callback_data=f"ANIYAPlaylists {videoid}|{user_id}|{ptype}|v|{channel}|{fplay}", style="primary"),
         ],
         [
-            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data=f"forceclose {videoid}|{user_id}", style="danger", custom_emoji_id="5219805369806629055"),
+            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data=f"forceclose {videoid}|{user_id}", style="danger", custom_emoji_id="6334598469746952256"),
         ],
     ]
     return buttons
@@ -126,7 +126,7 @@ def livestream_markup(_, videoid, user_id, mode, channel, fplay):
             api_btn(text=_["P_B_3"], callback_data=f"LiveStream {videoid}|{user_id}|{mode}|{channel}|{fplay}", style="primary"),
         ],
         [
-            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data=f"forceclose {videoid}|{user_id}", style="danger", custom_emoji_id="5219805369806629055"),
+            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data=f"forceclose {videoid}|{user_id}", style="danger", custom_emoji_id="6334598469746952256"),
         ],
     ]
     return buttons
@@ -140,7 +140,7 @@ def slider_markup(_, videoid, user_id, query, query_type, channel, fplay):
         ],
         [
             api_btn(text="◁", callback_data=f"slider B|{query_type}|{query}|{user_id}|{channel}|{fplay}", style="primary"),
-            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data=f"forceclose {query}|{user_id}", style="danger", custom_emoji_id="5219805369806629055"),
+            api_btn(text=str(_["CLOSE_BUTTON"]).strip(), callback_data=f"forceclose {query}|{user_id}", style="danger", custom_emoji_id="6334598469746952256"),
             api_btn(text="▷", callback_data=f"slider F|{query_type}|{query}|{user_id}|{channel}|{fplay}", style="primary"),
         ],
     ]
